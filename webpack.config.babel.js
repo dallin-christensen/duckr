@@ -34,14 +34,23 @@ const base = {
   module: {
     loaders: [
       {test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},
-      {test: /\.css$/, loader: 'style-loader!css-loader'}
+      { test: /\.css$/, loader: 'style-loader!css-loader?sourceMap&modules&localIdentName=[name]__[local]___[hash:base64:5]' }
     ]
   },
+  resolve: {
+    modules: [path.resolve(__dirname, "app"), "node_modules"]
+  }
 }
 
 const developmentConfig = {
   devtool: 'cheap-module-inline-source-map',
-  plugins: [HtmlWebpackPluginConfig]
+  devServer: {
+    contentBase: PATHS.build,
+    hot: true,
+    inline: true,
+    progress: true,
+  },
+  plugins: [HtmlWebpackPluginConfig, new webpack.HotModuleReplacementPlugin()]
 }
 
 const productionConfig = {

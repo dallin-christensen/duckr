@@ -1,7 +1,7 @@
 import React from 'react'
 // import { Router, Route } from 'react-router'
 import { HashRouter, Route } from 'react-router-dom'
-import { MainContainer } from '../containers'
+import { MainContainer } from 'containers'
 
 const routes = (
   <HashRouter>

@@ -4,9 +4,9 @@
     "es2015",
     "stage-0"
   ],
-  env: {
-    start: {
-      presets: [
+  "env": {
+    "start": {
+      "presets": [
         "react-hmre"
       ]
     }
