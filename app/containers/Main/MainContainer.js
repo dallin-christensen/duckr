@@ -1,11 +1,11 @@
 import React from 'react'
 
-class MainContainer extends React.Component{
-  render(){
+class MainContainer extends React.Component {
+  render () {
     return (
-      <p>Hello World!</p>
+      <p>{'Hello World!'}</p>
     )
   }
 }
 
-export default MainContainer;
+export default MainContainer
