@@ -6,7 +6,6 @@ import { container, navContainer, link } from './styles.css'
 Navigation.propTypes = ActionLinks.propTypes = NavLinks.propTypes = {
   isAuthed: PropTypes.bool.isRequired,
 }
-console.log(PropTypes)
 
 function NavLinks ({isAuthed}) {
   return isAuthed === true
