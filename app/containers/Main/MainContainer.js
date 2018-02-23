@@ -48,6 +48,6 @@ class MainContainer extends React.Component {
 }
 
 export default withRouter(connect(
-  (state) => ({isAuthed: state.isAuthed, isFetching: state.isFetching}),
+  ({ users }) => ({isAuthed: users.isAuthed, isFetching: users.isFetching}),
   (dispatch) => bindActionCreators(userActionCreators, dispatch)
 )(MainContainer))
