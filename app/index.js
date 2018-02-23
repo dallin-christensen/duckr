@@ -11,6 +11,9 @@ import restricted from 'helpers/restricted'
 const store = createStore(users, applyMiddleware(thunk));
 
 function checkAuth (component) {
+  // if(store.getState().isFetching === true){
+  //   return;
+  // }
   return restricted(component, store)
 }
 
