@@ -46,17 +46,17 @@ export function resetNewDucksAvailable () {
 export function setAndHandleFeedListener () {
   let initialFetch = true
   return function (dispatch, getState) {
-    if(getState().listeners.feeed === true){
+    if(getState().listeners.feed === true){
       return
     }
 
     dispatch(addListener('feed'))
     dispatch(settingFeedListener())
 
-    listenToFeed((feed, sortedIds) => {
+    listenToFeed(({feed, sortedIds}) => {
       dispatch(addMultipleDucks(feed))
       initialFetch === true
-        ? dispatch(settingFeedListener(sortedIds))
+        ? dispatch(settingFeedListenerSuccess(sortedIds))
         : dispatch(addNewDuckIdToFeed(soredIds[0]))
     }, (error) => dispatch(settingFeedListenerError(error)))
   }
