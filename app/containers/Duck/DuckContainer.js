@@ -1,10 +1,12 @@
 import React from 'react'
+import { bindActionCreators } from 'redux'
 import { PropTypes } from 'prop-types'
 import { connect } from 'react-redux'
 import { Duck } from 'components'
+import * as usersLikesActions from 'redux/modules/usersLikes'
 
 const { func, object, bool, number } = PropTypes
-console.log('proptypes', PropTypes)
+
 class DuckContainer extends React.Component {
   propTypes: {
     duck: object.isRequired,
@@ -16,23 +18,21 @@ class DuckContainer extends React.Component {
     addAndHandleLike: func.isRequired,
     handleDeleteLike: func.isRequired,
   }
+
   contextTypes: {
     router: PropTypes.object.isRequired,
   }
-  getDefaultProps () {
-    return {
-      hideReplyBtn: false,
-      hideLikeCount: false
-    }
-  }
+
   goToProfile = (e) => {
     e.stopPropagation()
     this.context.router.push('/' + this.props.duck.uid)
   }
+
   handleClick = () => {
     e.stopPropagation()
     this.context.router.push('/duckDetail/' + this.props.duck.duckId)
   }
+
   render () {
     return (
       <Duck
@@ -41,6 +41,11 @@ class DuckContainer extends React.Component {
         {...this.props}/>
     )
   }
+}
+
+DuckContainer.defaultProps = {
+  hideReplyBtn: false,
+  hideLikeCount: false
 }
 
 function mapStateToProps ({ducks, likeCount, usersLikes}, props) {
@@ -53,6 +58,11 @@ function mapStateToProps ({ducks, likeCount, usersLikes}, props) {
   }
 }
 
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators(usersLikesActions, dispatch)
+}
+
 export default connect(
   mapStateToProps,
+  mapDispatchToProps
 )(DuckContainer)
