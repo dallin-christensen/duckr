@@ -6,6 +6,7 @@ import { withRouter } from 'react-router'
 import { container, innerContainer } from './styles.css'
 import { bindActionCreators } from 'redux'
 import * as userActionCreators from 'redux/modules/users'
+import * as usersLikesActionCreators from 'redux/modules/usersLikes'
 import { formatUserInfo } from 'helpers/utils'
 import { firebaseAuth } from 'config/constants'
 
@@ -15,6 +16,7 @@ class MainContainer extends React.Component {
     authUser: PropTypes.func.isRequired,
     removeFetchingUser: PropTypes.func.isRequired,
     fetchingUserSuccess: PropTypes.func.isRequired,
+    setUsersLikes: PropTypes.func.isRequired,
   }
   contextTypes : {
     router: PropTypes.object.isRequired,
@@ -26,8 +28,8 @@ class MainContainer extends React.Component {
         const userInfo = formatUserInfo(userData.displayName, userData.photoURL, user.uid)
         this.props.authUser(user.uid)
         this.props.fetchingUserSuccess(user.uid, userInfo, Date.now())
+        this.props.setUsersLikes()
         if(this.props.location.pathname === '/'){
-          // this.props.history.replace('feed')
           this.context.router.history.replace('feed')
         }
       } else {
@@ -49,5 +51,8 @@ class MainContainer extends React.Component {
 
 export default withRouter(connect(
   ({ users }) => ({isAuthed: users.isAuthed, isFetching: users.isFetching}),
-  (dispatch) => bindActionCreators(userActionCreators, dispatch)
+  (dispatch) => bindActionCreators({
+    ...userActionCreators,
+    ...usersLikesActionCreators
+  }, dispatch)
 )(MainContainer))
