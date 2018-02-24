@@ -1,3 +1,4 @@
+import { fetchUser } from 'helpers/api'
 import auth from 'helpers/auth'
 import logout from 'helpers/auth'
 import saveUser from 'helpers/auth'
@@ -42,6 +43,15 @@ export function fetchingUserSuccess (uid, user, timestamp) {
     uid,
     user,
     timestamp
+  }
+}
+
+export function fetchAndHandleUser (uid) {
+  return function (dispatch) {
+    dispatch(fetchingUser())
+    return fetchUser(uid)
+      .then((user) => dispatch(fetchingUserSuccess(uid, user, Date.now())))
+      .catch((error) => dispatch(fetchingUserFailure(error)))
   }
 }
 

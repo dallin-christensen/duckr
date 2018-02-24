@@ -8,29 +8,21 @@ import * as usersLikesActions from 'redux/modules/usersLikes'
 const { func, object, bool, number } = PropTypes
 
 class DuckContainer extends React.Component {
-  propTypes: {
-    duck: object.isRequired,
-    handleClick: func,
-    hideLikeCount: PropTypes.bool.isRequired,
-    hideReplyBtn: PropTypes.bool.isRequired,
-    isLiked: PropTypes.bool.isRequired,
-    numberOfLikes: number,
-    addAndHandleLike: func.isRequired,
-    handleDeleteLike: func.isRequired,
+  constructor(props) {
+    super(props)
+
+    this.handleClick = this.handleClick.bind(this)
+    this.goToProfile = this.goToProfile.bind(this)
   }
 
-  contextTypes: {
-    router: PropTypes.object.isRequired,
-  }
-
-  goToProfile = (e) => {
+  goToProfile (e) {
     e.stopPropagation()
-    this.context.router.push('/' + this.props.duck.uid)
+    this.context.router.history.push('/' + this.props.duck.uid)
   }
 
-  handleClick = () => {
+  handleClick (e) {
     e.stopPropagation()
-    this.context.router.push('/duckDetail/' + this.props.duck.duckId)
+    this.context.router.history.push('/duckDetail/' + this.props.duck.duckId)
   }
 
   render () {
@@ -41,6 +33,20 @@ class DuckContainer extends React.Component {
         {...this.props}/>
     )
   }
+}
+
+DuckContainer.contextTypes = {
+  router: PropTypes.object.isRequired
+}
+
+DuckContainer.propTypes = {
+  duck: PropTypes.object.isRequired,
+  numberOfLikes: PropTypes.number,
+  isLiked: PropTypes.bool.isRequired,
+  hideLikeCount: PropTypes.bool.isRequired,
+  hideReplyBtn: PropTypes.bool.isRequired,
+  handleDeleteLike: PropTypes.func.isRequired,
+  addAndHandleLike: PropTypes.func.isRequired
 }
 
 DuckContainer.defaultProps = {

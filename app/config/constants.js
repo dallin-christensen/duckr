@@ -13,8 +13,6 @@ firebase.initializeApp(config);
 
 export const ref = firebase.database().ref()
 export const firebaseAuth = firebase.auth
-//for Facebook when live
-//Site URL: https://dallins-test-project.firebaseapp.com/__/auth/handler
-//App Domains:
-// dallins-test-project.firebaseio.com
-// dallins-test-project.firebaseapp.com
+
+export const usersDucksExpirationLength = 100000
+export const userExpirationLength = 100000
