@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types'
 import { mainContainer, container, content, repliesContainer,
   replyTextAreaContainer, replyTextArea } from './styles.css'
 import { subHeader, darkBtn, errorMsg } from 'sharedStyles/styles.css'
-import { DuckContainer } from 'containers'
+import { DuckContainer, RepliesContainer } from 'containers'
 import { formatReply } from 'helpers/utils'
 
 function Reply ({ submit }) {
@@ -49,7 +49,7 @@ export default function DuckDetails ({duckId, isFetching, authedUser, error, add
               <Reply submit={(replyText) => addAndHandleReply(duckId, formatReply(authedUser, replyText))}/>
             </div>
             <div className={repliesContainer}>
-              REPLY SECTION
+              <RepliesContainer duckId={duckId} />
             </div>
           </div>}
       {error ? <p className={errorMsg}>{error}</p> : null}
