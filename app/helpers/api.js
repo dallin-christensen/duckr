@@ -64,10 +64,20 @@ export function decrementNumberOfLikes (duckId) {
 
 export function fetchUser (uid) {
   return ref.child(`users/${uid}`).once('value')
-    .then((snapchot) => snapshot.val())
+    .then((snapshot) => snapshot.val())
 }
 
 export function fetchUsersDucks (uid) {
   return ref.child(`usersDucks/${uid}`).once('value')
     .then((snapshot) => snapshot.val() || {})
+}
+
+export function fetchDuck (duckId) {
+  return ref.child(`ducks/${duckId}`).once('value')
+    .then((snapshot) => snapshot.val())
+}
+
+export function fetchLikeCount (duckId) {
+  return ref.child(`likeCount/${duckId}`).once('value')
+    .then((snapshot) => snapshot.val() || 0)
 }
