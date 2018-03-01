@@ -51,7 +51,7 @@ DuckContainer.propTypes = {
 
 DuckContainer.defaultProps = {
   hideReplyBtn: false,
-  hideLikeCount: false
+  hideLikeCount: true
 }
 
 function mapStateToProps ({ducks, likeCount, usersLikes}, props) {
