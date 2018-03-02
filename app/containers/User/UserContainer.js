@@ -19,6 +19,7 @@ class UserContainer extends React.Component {
     lastUpdatedDucks: PropTypes.number.isRequired,
   }
   componentDidMount () {
+
     const uid = this.props.match.params.uid
     if (this.props.noUser === true || staleUser(this.props.lastUpdatedUser)){
       this.props.fetchAndHandleUser(uid)
