@@ -62,10 +62,7 @@ export function fetchAndHandleAuthedUser () {
       const userInfo = formatUserInfo(userData.displayName, userData.photoURL, user.uid)
       return dispatch(fetchingUserSuccess(user.uid, userInfo, Date.now()))
     })
-    .then(({user}) => {
-      console.log("howdy")
-      return saveUser(user)
-    })
+    .then(({user}) => saveUser(user))
     .then((user) => dispatch(authUser(user.id)))
     .catch((error) => dispatch(fetchingUserFailure(error)))
   }
